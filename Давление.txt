@@ -1,0 +1,17 @@
+alias on/off d0
+alias pressureFurnace d1
+alias Pressure60 r0
+alias Pressure100 r1
+alias PressureFurnace r2
+Start:
+l Pressure60 on/off Setting
+l PressureFurnace pressureFurnace Pressure
+beq Pressure60 1 Pres60
+beq Pressure60 2 Pres100
+j 0
+Pres60:
+yield
+j Start
+Pres100:
+yield
+j Start
