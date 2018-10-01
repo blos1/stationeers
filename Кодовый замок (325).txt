@@ -1,0 +1,49 @@
+alias button1 d0
+alias button2 d1
+alias button3 d2
+alias button4 d3
+alias button5 d4
+alias OutSetting d5
+button_one:
+l r1 button1 Setting
+l r2 button2 Setting
+l r3 button3 Setting
+l r4 button4 Setting
+l r5 button5 Setting
+bgtz r1 button_one
+bgtz r2 button_one
+bgtz r3 button_two
+bgtz r4 button_one
+bgtz r5 button_one
+j button_one
+button_two:
+yield
+l r1 button1 Setting
+l r2 button2 Setting
+l r3 button3 Setting
+l r4 button4 Setting
+l r5 button5 Setting
+bgtz r1 button_one
+bgtz r2 button_three
+bgtz r3 button_one
+bgtz r4 button_one
+bgtz r5 button_one
+j button_two
+button_three:
+yield
+l r1 button1 Setting
+l r2 button2 Setting
+l r3 button3 Setting
+l r4 button4 Setting
+l r5 button5 Setting
+bgtz r1 button_one
+bgtz r2 button_one
+bgtz r3 button_one
+bgtz r4 button_one
+bgtz r5 button_four
+j button_three
+button_four:
+yield
+s OutSetting On 1
+yield
+j button_one
