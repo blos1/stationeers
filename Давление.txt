@@ -1,17 +1,31 @@
-alias on/off d0
+alias dimmer d0
 alias pressureFurnace d1
-alias Pressure60 r0
-alias Pressure100 r1
-alias PressureFurnace r2
+alias valveFurnanceOut d2
+alias furnace r1
+alias Pressure60 r2
+alias Pressure100 r3
+alias PressureFurnace r4
 Start:
-l Pressure60 on/off Setting
+l furnace dimmer Setting
 l PressureFurnace pressureFurnace Pressure
-beq Pressure60 1 Pres60
-beq Pressure60 2 Pres100
-j 0
+beq furnace 0 valveFurOut
+beq furnace 1 Pres60
+beq furnace 2 Pres100
+j Start
+valveFurOut:
+s valveFurnanceOut Power 1
+s valveFurnanceOut Setting 100
+s valveFurnanceOut On 1
+j Start
 Pres60:
+s valveFurnanceOut Power 0
+s valveFurnanceOut Setting 0
+s valveFurnanceOut On 0
 yield
 j Start
 Pres100:
+s valveFurnanceOut Power 0
+s valveFurnanceOut Setting 0
+s valveFurnanceOut On 0
 yield
 j Start
