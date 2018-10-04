@@ -9,14 +9,31 @@ Start:
 l furnace dimmer Setting
 l PressureFurnace pressureFurnace Pressure
 beq furnace 0 valveFurOut
-beq furnace 1 Pres60
-beq furnace 2 Pres100
+beq furnace 1 waitingState1
+beq furnace 2 Pres60
+beq furnace 3 Pres100
 j Start
 valveFurOut:
+beq PressureFurnace 0 waitingState1
 s valveFurnanceOut Power 1
 s valveFurnanceOut Setting 100
 s valveFurnanceOut On 1
+l PressureFurnace pressureFurnace Pressure
+beq PressureFurnace 0 waitingState1
+bgtz PressureFurnace valveFurOut
 j Start
+waitingState1:
+s valveFurnanceOut Power 0
+s valveFurnanceOut Setting 0
+s valveFurnanceOut On 0
+waitingState2:
+l furnace dimmer Setting
+l PressureFurnace pressureFurnace Pressure
+bgtz PressureFurnace valveFurOut
+beq furnace 1 waitingState1
+beq furnace 2 Pres60
+beq furnace 3 Pres100
+j waitingState2
 Pres60:
 s valveFurnanceOut Power 0
 s valveFurnanceOut Setting 0

@@ -10,11 +10,14 @@ l r2 button2 Setting
 l r3 button3 Setting
 l r4 button4 Setting
 l r5 button5 Setting
-bgtz r1 button_one
-bgtz r2 button_one
+bgtz r1 checkButton
+bgtz r2 checkButton
 bgtz r3 button_two
-bgtz r4 button_one
-bgtz r5 button_one
+bgtz r4 checkButton
+bgtz r5 checkButton
+j button_one
+checkButton:
+s OutSetting On 0
 j button_one
 button_two:
 yield
